@@ -42,12 +42,12 @@
                 margin-right: auto;
             }
             #right-home {
-                background-image: url(images/friends.png);
+                background-image: url(image/friends.png);
             }
             #right-about {
-                background-image: url(images/fun.png);
+                background-image: url(image/fun.png);
             }
             #right-members {
-                background-image: url(images/selfie.png);
+                background-image: url(image/selfie.png);
             }
             
