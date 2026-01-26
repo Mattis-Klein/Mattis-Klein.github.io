@@ -5,7 +5,7 @@
                
                var sitePassword = "letmein";
                if (enteredPassword == sitePassword) {
-               window.location.assign("Members.html");
+               window.location.assign("members.html");
             } else {
                 // wrong password text is red, prompt to try again
                 console.log("wrong password"); 
