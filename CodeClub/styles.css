@@ -1,0 +1,53 @@
+            nav {
+                border-style: solid; 
+                border-width: 0.15em;  
+                border-color: rgb(255, 0, 124);  
+                border-radius: 2em; 
+                padding: 1em; 
+                font-family: 'Concert One', cursive;
+                }
+            a {
+                padding-left: 5em; 
+                color: rgb(255, 0, 124); 
+                font-family: 'Montserrat', sans-serif;
+
+            }
+            .row {
+                display: flex;  
+            }
+            .left-column {
+                height: 35vh; 
+                flex: 40%;
+            }
+            .right-column {
+                height: 35vh; 
+                flex: 60%; 
+                background-repeat:no-repeat; 
+                background-position: center; 
+                background-size:contain;
+            }
+            .main-heading {
+                color: rgb(255, 0, 124); 
+                font-size: 3.2em; 
+                font-family: 'Concert One', 
+                cursive;
+            }
+            #content-area {
+                font-family: 'Montserrat',sans-serif;  
+                margin-top: 6em;
+            }
+            #layout-container {
+                width:80%; 
+                margin-left: auto; 
+                margin-right: auto;
+            }
+            #right-home {
+                background-image: url(images/friends.png);
+            }
+            #right-about {
+                background-image: url(images/fun.png);
+            }
+            #right-members {
+                background-image: url(images/selfie.png);
+            }
+            
