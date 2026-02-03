@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samples | MKS</title>
+    <style>
+        .index {
+            border-radius: 8px;
+            width: 400px;
+            margin-left: 30px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body style="padding-left:7px;">
+    <!-- First I will try out the regular headings and paragraphs -->
+    <h1 id="top">Let's experiment with what we have learned!</h1>
+
+    <div>
+        <nav>
+            <div class="index">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#head_para">Headings and Paragraphs</a></li>
+                    <li><a href="#text">Text Formatting</a></li>
+                    <li><a href="#anchor">Anchor Tags</a></li>
+                    <li><a href="#image">Image Tags</a></li>
+                    <li><a href="#lists">Lists</a></li>
+                    <li><a href="#tables">Tables</a></li>
+                    <li><a href="#forms">Forms</a></li>
+                    <li><a href="#semantic">Semantic Elements</a></li>
+                    <li><a href="#entities">HTML Entities</a></li>
+                    <li><a href="#iframe">Iframe Example</a></li>
+                </ul>
+            </div>
+            <p style="margin-left:5%; margin-top: 0px"> Click <a href="index.html">Here </a>to go to the Home page.</p>
+        </nav>
+    </div>
+    <h2 id="head_para">First we will explore simple headings and paragraphs</h2>
+    <h3>Paragraphs</h3>
+    <p>This is a simple HTML paragraph element.</p>
+    <p>This is a new paragraph.</p>
+    <p>When you add a new paragraph, it creates a space between the paragraphs.</p>
+    <h3>Line breaks</h3>
+    <p>This is a paragraph with a line break.<br>Here is the line after the break.<br>As you can see, the text continues
+        on a new line.</p>
+    <!-- The <pre> Element -->
+    <h3>The &lt;pre&gt; Element</h3>
+    <p>In HTML extra spaces and lines are ignored, unless you use the &lt;pre&gt; element like this:<br>
+    <pre>I can put      Spaces</pre>
+    <pre>Or even line
+    breaks
+    in
+    my
+    text!</pre>
+    </p>
+    <!-- The Lorem Element -->
+    <h3>The Lorem Element</h3>
+    <p>If you type p&gt;lorem8 you get that many words, for example:<br>Lorem ipsum dolor, sit amet consectetur
+        adipisicing elit.</p>
+
+
+    <!--Text Elements -->
+    <h2 id="text">Now let's explore some HTML Text-Formatting elements</h2>
+    <h3>Bold and Italic Text</h3>
+    <p>This is a <b>bold</b> word in a paragraph.<br><!-- <strong> is also used for Bold -->This is an <i>italic</i>
+        word in a paragraph.</p><!-- <em> is also used for Italic -->
+    <h3>Underlined and Strikethrough Text</h3>
+    <p>This is an <u>underlined</u> word in a paragraph.<br>This is a <s>strikethrough</s> word in a paragraph.</p>
+    <h3>Superscript and Subscript Text</h3>
+    <p>This is an example of superscript: E = mc<sup>2</sup><br>This is an example of subscript: H<sub>2</sub>O</p>
+    <!-- Anchor tags and attributes -->
+    <h2 id="anchor">Anchor tags</h2>
+    <p>This is an example of a hyperlink using the &lt;a&gt; tag:<br>Visit <a href="https://www.example.com">
+            Example.com</a></p>
+    <p>Here I used the target="_blank" attribute, which opens the link in a new tab:<br>Visit <a>
+            href="https://www.example.com" target="_blank">Example.com</a></p>
+    <p>You can also use anchor tags to take you to a certain place in the page:<br>Explore <a href="#line_breaks">Line
+            Breaks</a> Or: <a href="#top">Back to top</a></p>
+    <h4>Some more Anchor tag examples:</h4>
+    <p>Click here to <a href="mailto:mattiskleinbh@gmail.com">Send me an Email</a>
+        <br>This is a <a href="tel:+1234567890">call example</a> if my number would be linked to here you would be able
+        to
+        call me.
+    </p>
+    <!-- image tags -->
+    <h2 id="image">Image tags</h2>
+    <p>This is an example of displaying an image using the &lt;img&gt; tag: <br>
+        <img src="https://mattis-klein.github.io/firstWebpage/image/html.png" alt="HTML codeing" title="HTML Coding"
+            width="25%">
+        <br><br>
+    </p>
+    <!-- video tags -->
+    <h2 id="video">Video tags</h2>
+    <p>This is an example of displaying a video using the &lt;video&gt; tag: <br>
+        <video width="320" height="240" controls>
+            <source
+                src="https://www.msn.com/en-us/video/peopleandplaces/robot-babysat-my-newborn-for-one-night-i-watched-the-cameras-in-terror/vi-AA1Udxe9?ocid=winp1taskbar&cvid=69815a0e68454fcc8e6ab454684e1e3e&ei=5&contentId=AA1Udxe9&fromup=savedvideos"
+                type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <br><br>
+    </p>
+    <h2 id="video">Video tags</h2>
+    <p>
+        Watch this video on MSN:
+        <a href="https://www.msn.com/en-us/video/peopleandplaces/robot-babysat-my-newborn-for-one-night-i-watched-the-cameras-in-terror/vi-AA1Udxe9"
+            target="_blank" rel="noopener">Robot Babysat My Newborn</a>
+    </p>
+
+    <!-- lists  -->
+    <h2 id="lists">Let's explore some lists</h2>
+    <h3>Unordered Lists</h3>
+    <p>This is an example of an unordered list (bullet points):</p>
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3
+            <ul>
+                <li>Subitem 3.1</li>
+                <li>Subitem 3.2</li>
+            </ul>
+        </li>
+        <li>Item 4</li>
+    </ul>
+
+    <h3>Ordered Lists</h3>
+    <p>This is an example of an ordered list (numbered):</p>
+    <ol>
+        <li>First item</li>
+        <li>Second item</li>
+        <li>Third item
+            <ul>
+                <li>Subitem 3.1</li>
+                <li>Subitem 3.2</li>
+            </ul>
+        </li>
+        <li>Fourth item</li>
+    </ol>
+    <p>(as you can see you can nest lists inside of other lists)</p>
+    <h3>Description Lists</h3>
+    <p>This is an example of a description list:</p>
+    <dl>
+        <dt>HTML</dt>
+        <dd>A markup language for creating web pages.</dd>
+        <dt>CSS</dt>
+        <dd>A style sheet language used for describing the presentation of a document.</dd>
+        <dt>JavaScript</dt>
+        <dd>A programming language commonly used in web development.</dd>
+    </dl>
+    <h2 id="tables">Tables:</h2>
+    <h3>Simple Table</h3>
+    <p>This is an example of a simple table:</p>
+    <table border="1">
+        <tr>
+            <th>Table Header 1</th>
+            <th>Table Header 2</th>
+            <th>Table Header 3</th>
+        </tr>
+        <tr>
+            <td>Object 1:1</td>
+            <td>Object 2:1</td>
+            <td>Object 3:1</td>
+        </tr>
+        <tr>
+            <td>Object 1:2</td>
+            <td>Object 2:2</td>
+            <td>Object 3:2</td>
+        </tr>
+        <tr>
+            <td colspan="2">colspan example 1</td>
+            <td rowspan="2">rowspan sample</td>
+        </tr>
+        <tr>
+            <td colspan="2">colspan example 2</td>
+        </tr>
+    </table>
+    <h2 id="forms">Forms</h2>
+    <h3>Simple Form Example</h3>
+    <form action="/submit_form" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" placeholder="Enter your name here"><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" placeholder="Enter your email here"><br><br>
+        <label for="password">password</label><br>
+        <input type="password" id="password" name="password" placeholder="Enter your password here"><br><br>
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" placeholder="Enter your age here"><br><br>
+        <label for="details">Additional Details:</label><br>
+        <textarea id="details" name="details" placeholder="Enter additional details here" rows="6"></textarea><br><br>
+
+        <!-- form elements -->
+
+        <!-- checkboxes -->
+        <label for="Hobbies">Select your Hobbies:</label><br>
+        <input type="checkbox" id="Reading" name="Hobbies" value="Reading">
+        <label for="Reading">Reading</label><br>
+        <input type="checkbox" id="Traveling" name="Hobbies" value="Traveling">
+        <label for="Traveling">Traveling</label><br>
+        <input type="checkbox" id="Dancing" name="Hobbies" value="Dancing">
+        <label for="Dancing">Dancing</label><br>
+        <input type="checkbox" id="Singing" name="Hobbies" value="Singing">
+        <label for="Singing">Singing</label><br><br>
+
+        <!-- dropdown -->
+        <label for="country">Select your country:</label><br>
+        <select id="country" name="country">
+            <option value="usa">USA</option>
+            <option value="canada">Canada</option>
+            <option value="uk">UK</option>
+            <option value="australia">Australia</option>
+        </select><br><br>
+
+        <!-- radio buttons -->
+        <p>Would you like to receive our weekly newsletter?</p>
+        <input type="radio" id="yes" name="options" value="yes">
+        <label for="yes">yes</label> <input type="radio" id="no" name="options" value="no">
+        <label for="no">no</label><br><br><br><br>
+        <!-- submit button -->
+        <input type="submit" value="Submit Form">
+    </form>
+    <!-- semantic elements -->
+    <h2 id="semantic">Semantic Elements</h2>
+    <h3>Header, Nav, Section, Article, Aside, Footer</h3>
+    <p>These elements help structure the content of a webpage in a meaningful way, so that both users and search engines
+        can better understand the content and its organization.</p>
+    <!-- entities -->
+    <h2 id="entities">HTML Entities</h2>
+    <p>HTML entities are special codes that represent characters in HTML. They are used to display characters that have
+        a special meaning in HTML, such as <,>, &, ", and '.</p>
+    <p>Here are some common HTML entities:</p>
+    <ul>
+        <li>&amp;amp; - Ampersand (&)</li>
+        <li>&amp;lt; - Less than (<) </li>
+        <li>&amp;gt; - Greater than (>)</li>
+        <li>&amp;quot; - Double quotation mark (")</li>
+        <li>&amp;apos; - Single quotation mark (')</li>
+        <li>&amp;copy; - Copyright symbol (©)</li>
+        <li>&amp;reg; - Registered trademark symbol (®)</li>
+        <li>&amp;nbsp; - Non-breaking space</li>
+    </ul>
+    <!-- This is an iframe for mattis-klein.github.io -->
+    <h2 id="iframe">Iframe Example</h2>
+    <p>An iframe (inline frame) is an HTML element that allows you to embed another HTML document within the current
+        document. Here is an example of an iframe:</p>
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12206.871015767072!2d-74.2296709!3d40.1040054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1769629722756!5m2!1sen!2sus"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <h2>Conclusion</h2>
+    <p>Congratulations! You have now explored various HTML elements and their functionalities. You have learned about
+        headings, paragraphs, text formatting, anchor tags, image tags, lists, tables, forms, semantic elements, HTML
+        entities, and iframes. With this knowledge, you can create well-structured and visually appealing web pages.
+        Keep practicing and experimenting with different HTML elements to enhance your web development skills. Happy
+        coding!</p>
+
+
+</body>
+
+</html>
