@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order | Simcha Poems</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="index.html" aria-label="Simcha Poems Home">
+      <img src="assets/logo.svg" class="brand-logo" alt="Simcha Poems logo">
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="samples.html">Samples</a>
+      <a href="order.html" class="btn">Order Now</a>
+    </nav>
+  </div>
+</header>
+
+
+<main class="page">
+  <div class="container">
+    <div class="page-head">
+      <h1>Order your custom poem</h1>
+      <p class="lead">Fill this out and we’ll get back to you to confirm details and pricing.</p>
+    </div>
+
+    <div class="grid order-grid">
+      <form class="card form" onsubmit="return fakeSubmit(event)">
+        <div class="field">
+          <label for="occasion">Occasion</label>
+          <input id="occasion" name="occasion" type="text" placeholder="Wedding, Bar Mitzvah, Birthday, etc." required />
+        </div>
+
+        <div class="field">
+          <label for="names">Name(s) to include</label>
+          <input id="names" name="names" type="text" placeholder="English and/or Hebrew spelling" required />
+        </div>
+
+        <div class="field">
+          <label for="details">Details to include</label>
+          <textarea id="details" name="details" rows="5" placeholder="Traits, memories, themes, family details, etc." required></textarea>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="deadline">Deadline</label>
+            <input id="deadline" name="deadline" type="date" />
+          </div>
+
+          <div class="field">
+            <label for="format">Delivery format</label>
+            <select id="format" name="format">
+              <option value="word">Word document</option>
+              <option value="pdf">Designed PDF (+$25)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+
+        <button type="submit" class="btn large full">Submit Order</button>
+        <p class="fineprint">This demo form doesn’t send yet — it shows a confirmation message. (We can wire it up to email or Google Forms next.)</p>
+      </form>
+
+      <aside class="card side">
+        <h2>What you’ll get</h2>
+        <ul class="checklist">
+          <li>Personalized poem crafted for your simcha</li>
+          <li>Delivered as Word or print-ready designed PDF</li>
+          <li>Pricing starts at $65</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3>Payment</h3>
+        <p>Cash, Check, or Zelle.</p>
+
+        <div class="divider"></div>
+
+        <h3>Tip</h3>
+        <p>If you’re printing, the designed PDF option is perfect — ready for framing.</p>
+      </aside>
+    </div>
+  </div>
+</main>
+
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p>© 2026 Simcha Poems • Custom Poetry for Every Occasion</p>
+    <p class="fineprint">Delivered as a Word document or a print-ready designed PDF.</p>
+  </div>
+</footer>
+<script src="main.js"></script>
+
+</body>
+</html>
