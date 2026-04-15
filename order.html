@@ -7,232 +7,6 @@
   <title>Order | Simcha Poems</title>
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
-  <style>
-    .order-shell {
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: start;
-    }
-
-    .order-panel {
-      background: rgba(255, 255, 255, .9);
-      border: 1px solid rgba(74, 59, 19, .1);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .order-panel h2 {
-      margin: 0 0 10px;
-      font-size: 1.5rem;
-      letter-spacing: -0.02em;
-    }
-
-    .order-progress {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .order-progress-step {
-      border-radius: 16px;
-      padding: 12px 14px;
-      border: 1px solid rgba(74, 59, 19, .1);
-      background: rgba(255, 255, 255, .65);
-      color: var(--muted);
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    .order-progress-step strong {
-      display: block;
-      margin-bottom: 4px;
-      color: var(--ink);
-      font-size: .84rem;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-    }
-
-    .order-progress-step.active {
-      background: rgba(212, 160, 40, .14);
-      border-color: rgba(212, 160, 40, .3);
-      transform: translateY(-1px);
-      color: rgba(74, 59, 19, .82);
-    }
-
-    .order-progress-step.done {
-      background: rgba(255, 255, 255, .85);
-      border-color: rgba(212, 160, 40, .2);
-      color: rgba(74, 59, 19, .75);
-    }
-
-    .order-step {
-      display: none;
-    }
-
-    .order-step.active {
-      display: block;
-    }
-
-    .order-step-header {
-      margin-bottom: 18px;
-    }
-
-    .order-step-header p {
-      margin: 8px 0 0;
-      color: var(--muted);
-    }
-
-    .order-field-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .step-note {
-      margin: -4px 0 16px;
-      color: var(--muted);
-      font-size: .94rem;
-    }
-
-    .conditional-field,
-    .hidden {
-      display: none;
-    }
-
-    .conditional-field.show {
-      display: block;
-    }
-
-    .recipient-group,
-    .detail-group {
-      padding: 18px;
-      margin-bottom: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(212, 160, 40, .18);
-      background: rgba(244, 209, 118, .12);
-    }
-
-    .group-title {
-      margin: 0 0 12px;
-      font-size: 1.05rem;
-      color: var(--ink);
-    }
-
-    .order-actions {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 24px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(74, 59, 19, .1);
-    }
-
-    .order-actions-left,
-    .order-actions-right {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .order-btn {
-      font: inherit;
-      border-radius: 14px;
-      padding: 12px 18px;
-      cursor: pointer;
-      border: 1px solid transparent;
-      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-    }
-
-    .order-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .order-btn.primary {
-      background: linear-gradient(135deg, var(--brand), var(--brand-2));
-      color: white;
-      box-shadow: 0 10px 24px rgba(212, 160, 40, .25);
-    }
-
-    .order-btn.secondary {
-      background: rgba(255, 255, 255, .75);
-      color: var(--ink);
-      border-color: rgba(74, 59, 19, .12);
-    }
-
-    .order-btn.ghost {
-      background: transparent;
-      color: var(--muted);
-      border-color: rgba(74, 59, 19, .12);
-    }
-
-    .order-btn:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .order-success {
-      display: none;
-      margin-top: 18px;
-      padding: 18px;
-      border-radius: 18px;
-      background: rgba(212, 160, 40, .12);
-      border: 1px solid rgba(212, 160, 40, .18);
-    }
-
-    .order-success.show {
-      display: block;
-    }
-
-    .order-side-card+.order-side-card {
-      margin-top: 16px;
-    }
-
-    .side-list {
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    .side-list li+li {
-      margin-top: 8px;
-    }
-
-    @media (max-width: 900px) {
-      .order-shell {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-
-      .order-progress,
-      .order-field-row {
-        grid-template-columns: 1fr;
-      }
-
-      .order-actions {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .order-actions-left,
-      .order-actions-right {
-        width: 100%;
-      }
-
-      .order-actions-right {
-        justify-content: flex-end;
-      }
-
-      .order-btn {
-        width: 100%;
-      }
-    }
-  </style>
 </head>
 
 <body>
@@ -260,8 +34,9 @@
   <main class="page">
     <div class="container">
       <div class="page-head">
-        <h1>Order your custom poem</h1>
-        <p class="lead">Share the key details step by step so the writing can be tailored to your occasion.</p>
+        <h1>Commission your custom poem</h1>
+        <p class="lead">Share the key details and occasion notes so the poem can be written in the right voice and
+          tone.</p>
       </div>
 
       <div class="order-shell">
@@ -285,7 +60,7 @@
             <section class="order-step active" data-step="1">
               <div class="order-step-header">
                 <h2>Customer Information</h2>
-                <p>How should I contact you after reviewing your request?</p>
+                <p>How should I reach you once your request is reviewed?</p>
               </div>
 
               <div class="order-field-row">
@@ -324,7 +99,7 @@
             <section class="order-step" data-step="2">
               <div class="order-step-header">
                 <h2>Occasion Information</h2>
-                <p>Select the poem language, then choose the occasion type.</p>
+                <p>Choose language and occasion so the poem can be tailored correctly.</p>
               </div>
 
               <div class="field">
@@ -418,7 +193,7 @@
             <section class="order-step" data-step="3">
               <div class="order-step-header">
                 <h2>Recipient Information</h2>
-                <p class="step-note">Hebrew names are always collected. English names appear when English is selected.
+                <p class="step-note">Hebrew names are always collected. English fields appear when English is selected.
                 </p>
               </div>
 
@@ -527,9 +302,9 @@
           <div class="order-panel order-side-card">
             <h2>What you’ll get</h2>
             <ul class="side-list">
-              <li>A structured request with names, occasion type, and message direction.</li>
+              <li>A structured poetry brief with names, occasion, and tone direction.</li>
               <li>Hebrew name collection with optional English naming fields.</li>
-              <li>Optional designed PDF add-on for framing and presentation.</li>
+              <li>An optional designed PDF add-on for framing or display.</li>
             </ul>
           </div>
 
@@ -538,7 +313,7 @@
             <ul class="side-list">
               <li>Correct Hebrew spellings for names.</li>
               <li>Your required delivery date.</li>
-              <li>Any message, dedication, or theme to include.</li>
+              <li>Any dedication, message, or theme to include.</li>
             </ul>
           </div>
 
@@ -556,8 +331,8 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>© 2026 Simcha Poems • Custom Poetry for Every Occasion</p>
-      <p class="fineprint">Delivered as a Word document or a print-ready designed PDF.</p>
+      <p>© 2026 Simcha Poems</p>
+      <p class="fineprint">Custom poems delivered as Word, with optional print-ready PDF presentation.</p>
     </div>
   </footer>
   <script src="main.js"></script>
