@@ -14,7 +14,7 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="/" aria-label="Simcha Poems Home">
-        <img src="assets/logo.svg" class="brand-logo" alt="Simcha Poems logo">
+        <img src="assets/logo.svg" class="brand-logo" alt="Simcha Poems">
       </a>
 
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -74,17 +74,6 @@
                 </div>
               </div>
 
-              <div class="order-field-row">
-                <div class="field">
-                  <label for="phone">Phone number</label>
-                  <input id="phone" name="phone" type="tel" placeholder="(123) 456-7890" required />
-                </div>
-                <div class="field">
-                  <label for="email">Email address</label>
-                  <input id="email" name="email" type="email" placeholder="you@example.com" />
-                </div>
-              </div>
-
               <div class="field">
                 <label for="contact-method">Best way to contact you</label>
                 <select id="contact-method" name="contact-method" required>
@@ -93,6 +82,16 @@
                   <option value="email">Email</option>
                   <option value="text">Text message</option>
                 </select>
+              </div>
+
+              <div class="field hidden" id="contact-phone-field">
+                <label for="phone">Phone number</label>
+                <input id="phone" name="phone" type="tel" placeholder="(123) 456-7890" />
+              </div>
+
+              <div class="field hidden" id="contact-email-field">
+                <label for="email">Email address</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" />
               </div>
             </section>
 
@@ -351,6 +350,11 @@
 
       const poemLanguage = document.getElementById('poem-language');
       const occasionType = document.getElementById('occasion-type');
+      const contactMethod = document.getElementById('contact-method');
+      const contactPhoneField = document.getElementById('contact-phone-field');
+      const contactEmailField = document.getElementById('contact-email-field');
+      const phoneInput = document.getElementById('phone');
+      const emailInput = document.getElementById('email');
       const conditionalField = document.getElementById('conditionalField');
       const simchaOptions = document.getElementById('simcha-options');
       const eventOptions = document.getElementById('event-options');
@@ -405,6 +409,26 @@
       function updateButtons() {
         prevBtn.disabled = currentStep === 1;
         nextBtn.textContent = currentStep === totalSteps ? 'Submit' : 'Next';
+      }
+
+      function updateContactFields() {
+        const method = contactMethod.value;
+        const usePhone = method === 'phone' || method === 'text';
+        const useEmail = method === 'email';
+
+        contactPhoneField.classList.toggle('hidden', !usePhone);
+        contactEmailField.classList.toggle('hidden', !useEmail);
+
+        phoneInput.required = usePhone;
+        emailInput.required = useEmail;
+
+        if (!usePhone) {
+          phoneInput.value = '';
+        }
+
+        if (!useEmail) {
+          emailInput.value = '';
+        }
       }
 
       function resetOccasionFields() {
@@ -666,6 +690,7 @@
       });
 
       cancelBtn.addEventListener('click', handleCancel);
+      contactMethod.addEventListener('change', updateContactFields);
       poemLanguage.addEventListener('change', configureRecipientStep);
       occasionType.addEventListener('change', handleOccasionTypeChange);
       simchaSelect.addEventListener('change', () => handleSecondaryChange(simchaSelect));
@@ -679,6 +704,7 @@
 
       showStep(currentStep);
       updateButtons();
+      updateContactFields();
       resetOccasionFields();
       resetRecipientFields();
     })();

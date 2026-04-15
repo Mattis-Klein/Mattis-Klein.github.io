@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Simcha Poems icon">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d9488"/>
+      <stop offset="1" stop-color="#5eead4"/>
+    </linearGradient>
+  </defs>
+  <rect x="8" y="8" rx="28" ry="28" width="112" height="112" fill="url(#g)"/>
+  <!-- Open book left page -->
+  <path d="M22 90 L22 44 C22 40 26 36 30 36 L64 38 L64 94 Z" fill="#fff" opacity="0.90"/>
+  <!-- Open book right page -->
+  <path d="M64 38 L98 36 C102 36 106 40 106 44 L106 90 L64 94 Z" fill="#fff" opacity="0.75"/>
+  <!-- Book spine -->
+  <line x1="64" y1="38" x2="64" y2="94" stroke="rgba(13,148,136,0.3)" stroke-width="2.5"/>
+  <!-- Left page lines -->
+  <line x1="30" y1="54" x2="60" y2="54" stroke="rgba(13,148,136,0.4)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="65" x2="60" y2="65" stroke="rgba(13,148,136,0.4)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="30" y1="76" x2="52" y2="76" stroke="rgba(13,148,136,0.4)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Right page lines -->
+  <line x1="68" y1="54" x2="98" y2="54" stroke="rgba(13,148,136,0.3)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="68" y1="65" x2="98" y2="65" stroke="rgba(13,148,136,0.3)" stroke-width="3" stroke-linecap="round"/>
+  <line x1="68" y1="76" x2="88" y2="76" stroke="rgba(13,148,136,0.3)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Quill (feather outline + shaft) -->
+  <path d="M90 18 C106 10 120 22 112 44 C108 56 98 64 90 76" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity="0.88"/>
+  <path d="M92 20 C98 36 96 54 90 76" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" opacity="0.80"/>
+</svg>

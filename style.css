@@ -70,7 +70,7 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  min-height: 72px;
+  min-height: 78px;
 }
 
 .brand {
@@ -81,7 +81,7 @@ img {
 }
 
 .brand-logo {
-  height: 50px;
+  height: 30px;
   width: auto;
 }
 
@@ -204,17 +204,14 @@ img {
 }
 
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(46, 36, 23, 0.08);
+  display: inline-block;
+  padding: 0;
   color: var(--ink-soft);
-  font-size: .9rem;
+  font-size: .78rem;
   font-weight: 700;
-  margin-bottom: 22px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .hero-copy h1,
@@ -247,8 +244,14 @@ img {
   display: flex;
   gap: 18px;
   flex-wrap: wrap;
-  margin-bottom: 0;
+  margin-bottom: 6px;
   align-items: center;
+}
+
+.hero-note {
+  margin: 20px 0 0;
+  color: rgba(46, 36, 23, 0.7);
+  font-size: .96rem;
 }
 
 .hero-proof {
@@ -466,11 +469,11 @@ img {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .feature-label {
-  font-size: .76rem;
+  font-size: .72rem;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -478,18 +481,18 @@ img {
 }
 
 .feature-tone {
-  font-size: .88rem;
+  font-size: .84rem;
   color: var(--muted);
 }
 
 .excerpt {
   color: rgba(46, 36, 23, 0.92);
-  line-height: 1.85;
-  font-size: 1rem;
+  line-height: 1.8;
+  font-size: .98rem;
 }
 
 .feature-card.featured .excerpt {
-  font-size: 1.08rem;
+  font-size: 1.04rem;
 }
 
 .card.poem p {
@@ -603,8 +606,12 @@ img {
 .showcase-head h2 {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.45rem;
+  font-size: 1.38rem;
   letter-spacing: -0.03em;
+}
+
+.showcase-intro {
+  margin-bottom: 30px;
 }
 
 .showcase-grid {
@@ -658,7 +665,7 @@ img {
 }
 
 .card.poem h3 {
-  font-size: 1.7rem;
+  font-size: 1.62rem;
 }
 
 .form .field {
@@ -1187,7 +1194,7 @@ select:focus {
   }
 
   .brand-logo {
-    height: 42px;
+    height: 24px;
   }
 
   .footer-inner {
