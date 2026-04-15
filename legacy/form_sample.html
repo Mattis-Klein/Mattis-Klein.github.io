@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form-order</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4d176;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Launch Button */
+        .launch-container {
+            text-align: center;
+        }
+
+        .launch-btn {
+            background-color: #d4a028;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(74, 59, 19, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .launch-btn:hover {
+            background-color: #c08f1f;
+            box-shadow: 0 6px 18px rgba(74, 59, 19, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .launch-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Modal Container */
+        .modal-container {
+            background-color: #fff;
+            max-width: 600px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: #999;
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        /* Form Container */
+        .customer-info {
+            padding: 40px 30px 30px 30px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+
+        /* Form Steps */
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        /* Form Fields */
+        .name-fields {
+            display: flex;
+            gap: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            transition: border-color 0.2s ease;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #d4a028;
+            box-shadow: 0 0 0 3px rgba(212, 160, 40, 0.1);
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        /* Conditional Field */
+        .conditional-field {
+            display: none;
+            margin-top: -10px;
+        }
+
+        .conditional-field.show {
+            display: block;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .section-note {
+            margin: -10px 0 20px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .recipient-group,
+        .detail-group {
+            padding: 18px;
+            margin-bottom: 20px;
+            border: 1px solid #ead8a5;
+            border-radius: 8px;
+            background-color: #fffaf0;
+        }
+
+        .group-title {
+            margin: 0 0 14px;
+            color: #4a3b13;
+            font-size: 18px;
+        }
+
+        /* Button Group */
+        .button-group {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-previous {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-previous:hover:not(:disabled) {
+            background-color: #5a6268;
+        }
+
+        .btn-previous:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-next {
+            background-color: #d4a028;
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-next:hover {
+            background-color: #c08f1f;
+        }
+
+        .btn-cancel {
+            background-color: transparent;
+            color: #666;
+            border: 1px solid #ccc;
+        }
+
+        .btn-cancel:hover {
+            background-color: #f5f5f5;
+            border-color: #999;
+            color: #333;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .modal-container {
+                width: 95%;
+                max-height: 90vh;
+            }
+
+            .customer-info {
+                padding: 30px 20px 20px 20px;
+            }
+
+            .name-fields {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .button-group {
+                flex-wrap: wrap;
+            }
+
+            .btn {
+                flex: 1 1 auto;
+                min-width: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Launch Button -->
+    <div class="launch-container">
+        <button class="launch-btn" id="launchBtn">Start Your Order</button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-container" id="modalContainer">
+            <button class="close-btn" id="closeBtn" aria-label="Close">&times;</button>
+
+            <div class="customer-info">
+                <form id="orderForm">
+                    <!-- Step 1: Customer Information -->
+                    <div class="form-step active" data-step="1">
+                        <h2>Customer Information</h2>
+
+                        <label for="first-name">Please enter your name:</label>
+                        <div class="name-fields">
+                            <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+                            <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+                        </div>
+
+                        <label for="phone">Please enter your phone number:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="(555) 111-2233" required> <!-- potentionally add js that as u type the () auto apear for area code etc. -->
+
+                        <label for="email">Please enter your email address:</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com">
+
+                        <label for="contact-method">What is the best way to contact you:</label>
+                        <!-- based on the answer that info is what we need  -->
+                        <select id="contact-method" name="contact-method" required>
+                            <option value="" disabled selected>Please select</option>
+                            <option value="phone">Phone</option>
+                            <option value="email">Email</option>
+                            <option value="text">Text Message</option>
+                        </select>
+                    </div>
+
+                    <!-- Step 2: Occasion Information -->
+                    <div class="form-step" data-step="2">
+                        <h2>Occasion Information</h2>
+
+                        <label for="poem-language">What language do you prefer?</label> <!-- this q belongs in the next page -->
+                        <select id="poem-language" name="poem-language" required>
+                            <option value="" disabled selected>Please select</option>
+                            <option value="hebrew">Hebrew</option>
+                            <option value="english">English</option>
+                        </select>
+
+                        <label for="occasion-type">What are you ordering a poem for?</label>
+                        <select id="occasion-type" name="occasion-type" required>
+                            <option value="" disabled selected>Please select</option>
+                            <option value="simcha">Simcha</option>
+                            <option value="event">Event</option>
+                            <option value="occasion">Occasion</option>
+                            <option value="gift">Gift</option>
+                            <option value="other">Other</option>
+                        </select>
+
+                        <!-- Dynamic Secondary Field -->
+                        <div class="conditional-field" id="conditionalField">
+                            <!-- Simcha Options -->
+                            <div id="simcha-options" style="display: none;">
+                                <label for="simcha-select">Select simcha type:</label>
+                                <select id="simcha-select" name="simcha-type">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="vort">Vort</option> <!-- chosson name (first+last), kallah name (first+last), parents name date of shidduch (opt.) -->
+                                    <option value="aufruf">Aufruf</option> <!-- same as vort --> <!-- we should really do the same for all wedding related stuff -->
+                                    <option value="wedding">Wedding</option>
+                                    <option value="upsherin">Sheva brachos</option>
+                                    <option value="bar-mitzvah">Bar Mitzvah</option> <!-- bochurs first and last, father, (mother) date, hall (special siyum)-->
+                                    <option value="bris">Bris</option> <!-- parents + grands names, # in family -->
+                                    <option value="upsherin">Upsherin</option> <!-- same as bris -->
+                                    <option value="other">Other</option> <!-- if other specify area -->
+                                </select>
+                            </div>
+
+                            <!-- Event Options -->
+                            <div id="event-options" style="display: none;">
+                                <label for="event-select">Select event type:</label>
+                                <select id="event-select" name="event-type">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="anniversary">Anniversary</option> 
+                                    <option value="birthday">Birthday</option>
+                                    <option value="siyum">Siyum</option>
+                                    <option value="graduation">Graduation</option>
+                                    <option value="other">Other</option> <!-- if other specify area -->
+                                </select>
+                            </div>
+
+                            <!-- Occasion Options -->
+                            <div id="occasion-options" style="display: none;">
+                                <label for="occasion-select">Select occasion type:</label>
+                                <select id="occasion-select" name="occasion-specific">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="mishloach-manos">Mishloach Manos</option>
+                                    <option value="shana-tova">Shana Tova</option>
+                                    <option value="pesach">Pesach</option>
+                                    <option value="chanukah">Chanukah</option>
+                                    <option value="yom-tov">Yom Tov</option>
+                                    <option value="other">Other</option> <!-- if other specify area -->
+                                </select>
+                            </div>
+
+                            <!-- Gift Options -->
+                            <div id="gift-options" style="display: none;">
+                                <label for="gift-select">Select gift type:</label>
+                                <select id="gift-select" name="gift-type">
+                                    <option value="" disabled selected>Please select</option>
+                                    <option value="baby-gift">Baby Gift</option>
+                                    <option value="thank-you">Thank You</option>
+                                    <option value="appreciation">Appreciation</option>
+                                    <option value="congratulations">Congrats</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Other Text Input (Primary) -->
+                            <div id="other-primary" style="display: none;">
+                                <label for="other-primary-input">Please specify:</label>
+                                <input type="text" id="other-primary-input" name="other-primary"
+                                    placeholder="Please describe...">
+                            </div>
+
+                            <!-- Other Text Input (Secondary) -->
+                            <div id="other-secondary" style="display: none;">
+                                <label for="other-secondary-input">Please specify:</label>
+                                <input type="text" id="other-secondary-input" name="other-secondary"
+                                    placeholder="Please describe...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Recipient Information -->
+                    <div class="form-step" data-step="3">
+                        <h2>Recipient Information</h2>
+                        <p class="section-note">Hebrew names are always collected. English names only appear when you
+                            choose an English poem.</p> <!-- firts q should be the language and based on that is the language of the names we need -->
+
+                        <div class="recipient-group" id="recipient-single-group">
+                            <h3 class="group-title" id="single-group-title">Recipient</h3>
+
+                            <div class="english-only-field hidden">
+                                <label for="recipient-name" id="single-name-label">Name of recipient</label>
+                                <input type="text" id="recipient-name" name="recipient-name"
+                                    placeholder="Enter recipient name">
+                            </div>
+
+                            <label for="recipient-hebrew-name" id="single-hebrew-label">Hebrew name of recipient</label>
+                            <input type="text" id="recipient-hebrew-name" name="recipient-hebrew-name"
+                                placeholder="Enter Hebrew name" required>
+                        </div>
+
+                        <div class="recipient-group hidden" id="recipient-couple-group">
+                            <h3 class="group-title">Recipient Names</h3>
+
+                            <h4 class="group-title" id="pair-title-1">Chosson</h4>
+                            <div class="english-only-field hidden">
+                                <label for="recipient-one-name" id="recipient-one-name-label">Chosson name</label>
+                                <input type="text" id="recipient-one-name" name="recipient-one-name"
+                                    placeholder="Enter name">
+                            </div>
+                            <label for="recipient-one-hebrew-name" id="recipient-one-hebrew-label">Chosson Hebrew
+                                name</label>
+                            <input type="text" id="recipient-one-hebrew-name" name="recipient-one-hebrew-name"
+                                placeholder="Enter Hebrew name">
+
+                            <h4 class="group-title" id="pair-title-2">Kallah</h4>
+                            <div class="english-only-field hidden">
+                                <label for="recipient-two-name" id="recipient-two-name-label">Kallah name</label>
+                                <input type="text" id="recipient-two-name" name="recipient-two-name"
+                                    placeholder="Enter name">
+                            </div>
+                            <label for="recipient-two-hebrew-name" id="recipient-two-hebrew-label">Kallah Hebrew
+                                name</label>
+                            <input type="text" id="recipient-two-hebrew-name" name="recipient-two-hebrew-name"
+                                placeholder="Enter Hebrew name">
+                        </div>
+
+                        <div class="detail-group hidden" id="siyum-detail-group">
+                            <h3 class="group-title">Siyum Details</h3>
+                            <label for="mesechta">Which mesechta is this for?</label>
+                            <input type="text" id="mesechta" name="mesechta" placeholder="For example: Bava Metzia">
+                        </div>
+
+                        <div class="detail-group hidden" id="bris-detail-group">
+                            <h3 class="group-title">Bris Details</h3>
+                            <div class="english-only-field hidden">
+                                <label for="baby-name">Baby name</label>
+                                <input type="text" id="baby-name" name="baby-name" placeholder="Enter baby name">
+                            </div>
+                            <label for="baby-hebrew-name">Baby Hebrew name</label>
+                            <input type="text" id="baby-hebrew-name" name="baby-hebrew-name"
+                                placeholder="Enter baby's Hebrew name">
+                            <label for="parent-names">Parent names</label>
+                            <input type="text" id="parent-names" name="parent-names" placeholder="Optional">
+                        </div>
+
+                        <label for="event-date">Date of event</label>
+                        <input type="date" id="event-date" name="event-date" required>
+
+                        <label for="due-date">When do you need this done by?</label>
+                        <input type="date" id="due-date" name="due-date" required>
+
+                        <label for="graphics-option">Do you want the layout and graphics done?</label>
+                        <select id="graphics-option" name="graphics-option">
+                            <option value="" disabled selected>Please select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+
+                        <label for="additional-details">Any additional event details?</label>
+                        <textarea id="additional-details" name="additional-details"
+                            placeholder="For example: mesechta details, family wording, dedications, or anything important to include"></textarea>
+
+                        <label for="special-ideas">Is there any specific idea, caption, or message you want
+                            included?</label>
+                        <textarea id="special-ideas" name="special-ideas"
+                            placeholder="Share any ideas, wording, or themes you want included"></textarea>
+                    </div>
+
+                    <!-- Button Group -->
+                    <div class="button-group">
+                        <button type="button" class="btn btn-previous" id="prevBtn" disabled>Previous</button>
+                        <button type="button" class="btn btn-next" id="nextBtn">Next</button>
+                        <button type="button" class="btn btn-cancel" id="cancelBtn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State
+        let currentStep = 1;
+        const totalSteps = 3;
+
+        // DOM Elements
+        const launchBtn = document.getElementById('launchBtn');
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalContainer = document.getElementById('modalContainer');
+        const closeBtn = document.getElementById('closeBtn');
+        const cancelBtn = document.getElementById('cancelBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const orderForm = document.getElementById('orderForm');
+        const formSteps = document.querySelectorAll('.form-step');
+
+        // Occasion Type Elements
+        const poemLanguage = document.getElementById('poem-language');
+        const occasionType = document.getElementById('occasion-type');
+        const conditionalField = document.getElementById('conditionalField');
+        const simchaOptions = document.getElementById('simcha-options');
+        const eventOptions = document.getElementById('event-options');
+        const occasionOptions = document.getElementById('occasion-options');
+        const giftOptions = document.getElementById('gift-options');
+        const otherPrimary = document.getElementById('other-primary');
+        const otherSecondary = document.getElementById('other-secondary');
+        const otherPrimaryInput = document.getElementById('other-primary-input');
+        const otherSecondaryInput = document.getElementById('other-secondary-input');
+
+        // Secondary Selects
+        const simchaSelect = document.getElementById('simcha-select');
+        const eventSelect = document.getElementById('event-select');
+        const occasionSelect = document.getElementById('occasion-select');
+        const giftSelect = document.getElementById('gift-select');
+
+        // Recipient Step Elements
+        const recipientSingleGroup = document.getElementById('recipient-single-group');
+        const recipientCoupleGroup = document.getElementById('recipient-couple-group');
+        const siyumDetailGroup = document.getElementById('siyum-detail-group');
+        const brisDetailGroup = document.getElementById('bris-detail-group');
+        const englishOnlyFields = document.querySelectorAll('.english-only-field');
+        const englishNameInputs = document.querySelectorAll('.english-only-field input');
+        const singleGroupTitle = document.getElementById('single-group-title');
+        const singleNameLabel = document.getElementById('single-name-label');
+        const singleHebrewLabel = document.getElementById('single-hebrew-label');
+        const pairTitleOne = document.getElementById('pair-title-1');
+        const pairTitleTwo = document.getElementById('pair-title-2');
+        const recipientOneNameLabel = document.getElementById('recipient-one-name-label');
+        const recipientOneHebrewLabel = document.getElementById('recipient-one-hebrew-label');
+        const recipientTwoNameLabel = document.getElementById('recipient-two-name-label');
+        const recipientTwoHebrewLabel = document.getElementById('recipient-two-hebrew-label');
+        const recipientName = document.getElementById('recipient-name');
+        const recipientHebrewName = document.getElementById('recipient-hebrew-name');
+        const recipientOneName = document.getElementById('recipient-one-name');
+        const recipientOneHebrewName = document.getElementById('recipient-one-hebrew-name');
+        const recipientTwoName = document.getElementById('recipient-two-name');
+        const recipientTwoHebrewName = document.getElementById('recipient-two-hebrew-name');
+        const mesechta = document.getElementById('mesechta');
+        const babyName = document.getElementById('baby-name');
+        const babyHebrewName = document.getElementById('baby-hebrew-name');
+
+        // Modal Functions
+        function openModal() {
+            modalOverlay.classList.add('show');
+            currentStep = 1;
+            showStep(currentStep);
+            updateButtons();
+            configureRecipientStep();
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('show');
+            orderForm.reset();
+            resetConditionalFields();
+            resetRecipientFields();
+            currentStep = 1;
+        }
+
+        function showStep(step) {
+            formSteps.forEach((formStep) => {
+                formStep.classList.remove('active');
+            });
+            const activeStep = document.querySelector(`[data-step="${step}"]`);
+            if (activeStep) {
+                activeStep.classList.add('active');
+            }
+        }
+
+        function updateButtons() {
+            prevBtn.disabled = currentStep === 1;
+
+            if (currentStep === totalSteps) {
+                nextBtn.textContent = 'Submit';
+            } else {
+                nextBtn.textContent = 'Next';
+            }
+        }
+
+        function isVisible(element) {
+            return !element.classList.contains('hidden') && element.offsetParent !== null;
+        }
+
+        function validateStep(step) {
+            const activeStep = document.querySelector(`[data-step="${step}"]`);
+            const requiredInputs = activeStep.querySelectorAll('[required]');
+
+            for (const input of requiredInputs) {
+                if (!isVisible(input)) {
+                    continue;
+                }
+
+                if (!input.value.trim()) {
+                    input.focus();
+                    alert('Please fill in all required fields.');
+                    return false;
+                }
+            }
+
+            if (step === 2 && !getEffectiveOccasionSelection()) {
+                alert('Please choose the occasion details before continuing.');
+                return false;
+            }
+
+            return true;
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            if (currentStep < totalSteps) {
+                currentStep++;
+                if (currentStep === 3) {
+                    configureRecipientStep();
+                }
+                showStep(currentStep);
+                updateButtons();
+            } else {
+                // Submit form
+                handleSubmit();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+                updateButtons();
+            }
+        }
+
+        function handleSubmit() {
+            if (!validateStep(currentStep)) {
+                return;
+            }
+
+            // Collect form data
+            const formData = new FormData(orderForm);
+            const data = Object.fromEntries(formData.entries());
+
+            console.log('Form submitted:', data);
+            alert('Order submitted successfully! (This is a demo)');
+
+            closeModal();
+        }
+
+        // Conditional Field Logic
+        function resetConditionalFields() {
+            conditionalField.classList.remove('show');
+            simchaOptions.style.display = 'none';
+            eventOptions.style.display = 'none';
+            occasionOptions.style.display = 'none';
+            giftOptions.style.display = 'none';
+            otherPrimary.style.display = 'none';
+            otherSecondary.style.display = 'none';
+
+            // Clear all secondary selections
+            simchaSelect.value = '';
+            eventSelect.value = '';
+            occasionSelect.value = '';
+            giftSelect.value = '';
+            otherPrimaryInput.value = '';
+            otherSecondaryInput.value = '';
+            otherPrimaryInput.required = false;
+            otherSecondaryInput.required = false;
+        }
+
+        function resetRecipientFields() {
+            recipientSingleGroup.classList.remove('hidden');
+            recipientCoupleGroup.classList.add('hidden');
+            siyumDetailGroup.classList.add('hidden');
+            brisDetailGroup.classList.add('hidden');
+            mesechta.required = false;
+            babyHebrewName.required = false;
+            recipientHebrewName.required = true;
+            recipientOneHebrewName.required = false;
+            recipientTwoHebrewName.required = false;
+            setEnglishFieldsVisibility();
+            updateSingleRecipientLabels('recipient', 'Hebrew name of recipient');
+            updatePairLabels('Chosson', 'Kallah');
+        }
+
+        function getEffectiveOccasionSelection() {
+            if (!occasionType.value) {
+                return '';
+            }
+
+            if (occasionType.value === 'other') {
+                return 'other';
+            }
+
+            const secondarySelections = {
+                simcha: simchaSelect.value,
+                event: eventSelect.value,
+                occasion: occasionSelect.value,
+                gift: giftSelect.value
+            };
+
+            const selectedValue = secondarySelections[occasionType.value] || '';
+            return selectedValue === 'other' ? 'other' : selectedValue;
+        }
+
+        function setEnglishFieldsVisibility() {
+            const showEnglishFields = poemLanguage.value === 'english';
+            englishOnlyFields.forEach((field) => {
+                field.classList.toggle('hidden', !showEnglishFields);
+            });
+            englishNameInputs.forEach((input) => {
+                input.required = showEnglishFields;
+            });
+        }
+
+        function updateSingleRecipientLabels(nameLabel, hebrewLabel, titleText = 'Recipient') {
+            singleGroupTitle.textContent = titleText;
+            singleNameLabel.textContent = nameLabel;
+            singleHebrewLabel.textContent = hebrewLabel;
+        }
+
+        function updatePairLabels(firstLabel, secondLabel) {
+            pairTitleOne.textContent = firstLabel;
+            pairTitleTwo.textContent = secondLabel;
+            recipientOneNameLabel.textContent = `${firstLabel} name`;
+            recipientOneHebrewLabel.textContent = `${firstLabel} Hebrew name`;
+            recipientTwoNameLabel.textContent = `${secondLabel} name`;
+            recipientTwoHebrewLabel.textContent = `${secondLabel} Hebrew name`;
+        }
+
+        function configureRecipientStep() {
+            const selection = getEffectiveOccasionSelection();
+            resetRecipientFields();
+
+            setEnglishFieldsVisibility();
+
+            if (!selection) {
+                return;
+            }
+
+            const marriageSelections = ['wedding', 'vort', 'aufruf'];
+            const twoRecipientSelections = ['anniversary', ...marriageSelections];
+
+            if (twoRecipientSelections.includes(selection)) {
+                recipientSingleGroup.classList.add('hidden');
+                recipientCoupleGroup.classList.remove('hidden');
+                recipientHebrewName.required = false;
+                recipientOneHebrewName.required = true;
+                recipientTwoHebrewName.required = true;
+
+                if (marriageSelections.includes(selection)) {
+                    updatePairLabels('Chosson', 'Kallah');
+                } else {
+                    updatePairLabels('Recipient 1', 'Recipient 2');
+                }
+
+                return;
+            }
+
+            if (selection === 'siyum') {
+                updateSingleRecipientLabels('Name of honoree', 'Hebrew name of honoree', 'Honoree');
+                siyumDetailGroup.classList.remove('hidden');
+                mesechta.required = true;
+                return;
+            }
+
+            if (selection === 'bris') {
+                recipientSingleGroup.classList.add('hidden');
+                brisDetailGroup.classList.remove('hidden');
+                babyHebrewName.required = true;
+                recipientHebrewName.required = false;
+                return;
+            }
+
+            const singleRecipientLabels = {
+                'bar-mitzvah': ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                upsherin: ['Name of child', 'Hebrew name of child', 'Child'],
+                birthday: ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                graduation: ['Name of graduate', 'Hebrew name of graduate', 'Graduate'],
+                'baby-gift': ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                'thank-you': ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                appreciation: ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                congratulations: ['Name of recipient', 'Hebrew name of recipient', 'Recipient'],
+                pesach: ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                'shana-tova': ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                'mishloach-manos': ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                chanukah: ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                purim: ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                'yom-tov': ['Family or recipient name', 'Hebrew family or recipient name', 'Recipient'],
+                other: ['Name of recipient', 'Hebrew name of recipient', 'Recipient']
+            };
+
+            const [nameLabel, hebrewLabel, titleText] = singleRecipientLabels[selection] || ['Name of recipient', 'Hebrew name of recipient', 'Recipient'];
+            updateSingleRecipientLabels(nameLabel, hebrewLabel, titleText);
+        }
+
+        function handleOccasionTypeChange() {
+            const value = occasionType.value;
+            resetConditionalFields();
+
+            if (!value) return;
+
+            conditionalField.classList.add('show');
+
+            switch (value) {
+                case 'simcha':
+                    simchaOptions.style.display = 'block';
+                    break;
+                case 'event':
+                    eventOptions.style.display = 'block';
+                    break;
+                case 'occasion':
+                    occasionOptions.style.display = 'block';
+                    break;
+                case 'gift':
+                    giftOptions.style.display = 'block';
+                    break;
+                case 'other':
+                    otherPrimary.style.display = 'block';
+                    otherPrimaryInput.required = true;
+                    break;
+            }
+
+            configureRecipientStep();
+        }
+
+        function handleSecondaryChange(selectElement) {
+            otherSecondary.style.display = 'none';
+            otherSecondaryInput.value = '';
+            otherSecondaryInput.required = false;
+
+            if (selectElement.value === 'other') {
+                otherSecondary.style.display = 'block';
+                otherSecondaryInput.required = true;
+            }
+
+            configureRecipientStep();
+        }
+
+        // Event Listeners
+        launchBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        prevBtn.addEventListener('click', previousStep);
+        nextBtn.addEventListener('click', nextStep);
+
+        // Close on overlay click (not container)
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeModal();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('show')) {
+                closeModal();
+            }
+        });
+
+        // Occasion type change
+        poemLanguage.addEventListener('change', configureRecipientStep);
+        occasionType.addEventListener('change', handleOccasionTypeChange);
+
+        // Secondary select changes
+        simchaSelect.addEventListener('change', () => handleSecondaryChange(simchaSelect));
+        eventSelect.addEventListener('change', () => handleSecondaryChange(eventSelect));
+        occasionSelect.addEventListener('change', () => handleSecondaryChange(occasionSelect));
+        giftSelect.addEventListener('change', () => handleSecondaryChange(giftSelect));
+
+        // Prevent form default submission
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleSubmit();
+        });
+    </script>
+</body>
+
+</html>
