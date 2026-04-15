@@ -10,11 +10,16 @@
     });
   }
 
-  // Active nav link
-  const page = location.pathname.split('/').pop() || 'index.html';
+  // Active nav link (supports both /page and /page.html URLs)
+  const rawPath = location.pathname.replace(/\/$/, '');
+  const page = rawPath.split('/').pop() || 'index';
+  const pageSlug = page.replace(/\.html$/i, '') || 'index';
+
   document.querySelectorAll('.site-nav a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === page) {
+    const href = a.getAttribute('href') || '';
+    const hrefSlug = href === '/' ? 'index' : href.replace(/^\//, '').replace(/\.html$/i, '');
+
+    if (hrefSlug === pageSlug) {
       a.classList.add('active');
     }
   });
