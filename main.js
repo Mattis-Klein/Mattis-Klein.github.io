@@ -4,9 +4,30 @@
   const btn = document.querySelector('.nav-toggle');
   const nav = document.querySelector('.site-nav');
   if (btn && nav) {
+    const closeNav = () => {
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+    };
+
     btn.addEventListener('click', () => {
       const isOpen = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!nav.classList.contains('open')) return;
+      if (nav.contains(event.target) || btn.contains(event.target)) return;
+      closeNav();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900 && nav.classList.contains('open')) {
+        closeNav();
+      }
     });
   }
 

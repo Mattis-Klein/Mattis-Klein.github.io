@@ -40,6 +40,7 @@ body {
   color: var(--ink);
   line-height: 1.68;
   letter-spacing: 0.01em;
+  overflow-x: clip;
 }
 
 a {
@@ -70,7 +71,8 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  min-height: 78px;
+  min-height: 104px;
+  position: relative;
 }
 
 .brand {
@@ -81,7 +83,7 @@ img {
 }
 
 .brand-logo {
-  height: 30px;
+  height: clamp(70px, 8.2vw, 100px);
   width: auto;
 }
 
@@ -89,6 +91,7 @@ img {
   display: flex;
   align-items: center;
   gap: 4px;
+  flex-wrap: wrap;
 }
 
 .site-nav a {
@@ -386,6 +389,15 @@ img {
 .grid {
   display: grid;
   gap: 28px;
+}
+
+.hero-inner>*,
+.split>*,
+.order-grid>*,
+.order-shell>*,
+.showcase-grid>*,
+.grid>* {
+  min-width: 0;
 }
 
 .grid.steps,
@@ -1125,9 +1137,10 @@ select:focus {
   }
 }
 
-@media (max-width: 720px) {
-  .container {
-    width: min(100% - 24px, 1160px);
+@media (max-width: 900px) {
+  .header-inner {
+    min-height: 90px;
+    gap: 12px;
   }
 
   .nav-toggle {
@@ -1136,26 +1149,34 @@ select:focus {
 
   .site-nav {
     position: absolute;
-    left: 12px;
-    right: 12px;
-    top: 74px;
+    left: 0;
+    right: 0;
+    top: calc(100% - 6px);
     display: none;
     flex-direction: column;
     align-items: stretch;
     gap: 8px;
     padding: 14px;
     border-radius: 20px;
-    background: rgba(250, 245, 236, 0.95);
+    background: rgba(250, 245, 236, 0.97);
     border: 1px solid rgba(46, 36, 23, 0.08);
     box-shadow: var(--shadow-strong);
+    z-index: 50;
   }
 
   .site-nav.open {
     display: flex;
   }
 
-  .site-nav a {
+  .site-nav a,
+  .site-nav .btn {
     width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    width: min(100% - 24px, 1160px);
   }
 
   .hero {
@@ -1172,6 +1193,10 @@ select:focus {
 
   .order-progress,
   .order-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .two-col {
     grid-template-columns: 1fr;
   }
 
@@ -1194,10 +1219,48 @@ select:focus {
   }
 
   .brand-logo {
-    height: 24px;
+    height: 54px;
   }
 
   .footer-inner {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 560px) {
+  .header-inner {
+    min-height: 80px;
+  }
+
+  .brand-logo {
+    height: 46px;
+  }
+
+  .hero {
+    padding: 36px 0 52px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.2rem, 12vw, 3.1rem);
+  }
+
+  .section,
+  .page {
+    padding: 56px 0;
+  }
+
+  .card,
+  .hero-card,
+  .order-panel,
+  .metric-card,
+  .note {
+    padding: 22px;
+  }
+
+  .scroll-top {
+    right: 14px;
+    bottom: 14px;
+    width: 42px;
+    height: 42px;
   }
 }
